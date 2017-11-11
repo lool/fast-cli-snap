@@ -1,0 +1,22 @@
+name: fast-cli
+version: git
+version-script: |
+  GIT_DIR=parts/fast-cli/go/src/github.com/gesquive/fast-cli/.git \
+      git describe --tags | sed s/^v//
+summary: fast-cli estimates your current download speed with fast.com
+description: |
+  fast-cli estimates your current internet download speed by performing a
+  series of downloads from Netflix's fast.com servers.
+grade: stable
+confinement: strict
+
+apps:
+  fast-cli:
+    command: bin/fast-cli
+    plugs: [network]
+
+parts:
+  fast-cli:
+    plugin: go
+    go-packages: [github.com/gesquive/fast-cli]
+
